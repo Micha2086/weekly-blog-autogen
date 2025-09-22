@@ -1,0 +1,38 @@
+name: Weekly Blog Draft
+
+on:
+  schedule:
+    # Lunes 07:00 UTC (≈ 09:00 Madrid en verano, 08:00 en invierno)
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate & email draft
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODEL: ${{ vars.OPENAI_MODEL }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ vars.SMTP_FROM }}
+          SMTP_TO: ${{ vars.SMTP_TO }}
+        run: python blog_autogen/main.py
