@@ -46,19 +46,26 @@ def pick_topic(topics, override=None):
     return topics[idx]
 
 def build_prompt(topic):
-    return f"""Eres un arquitecto senior en España. Redacta un post en español (900–1200 palabras) en formato Markdown para un blog profesional.
-Estilo: profesional, directo y cercano; contundente y sin humo; con humor ligero cuando tenga sentido. 
-Público: comunidades de propietarios y clientes que evalúan rehabilitación/obras en edificios residenciales.
-Año: 2025 (cita precios como estimaciones, no promesas).
-Incluye:
-- Título atractivo pero claro
-- Resumen ejecutivo (3–5 líneas)
-- 4–6 secciones con subtítulos y bullets accionables
-- Rangos de precios orientativos 2025 cuando aplique (aclarar que son estimaciones)
-- Riesgos habituales y cómo evitarlos
-- Checklist ejecutable
-- CTA final
-- Metadatos en cabecera YAML: title, date, slug, tags, excerpt, seo_title, seo_description
+    return f"""Eres un arquitecto senior en España y escribes para un blog propio.
+Tu tono debe sonar a Enrique: 
+- Profesional y claro, sin rodeos.
+- Cercano y expresivo, con chispa y naturalidad.
+- Contundente: habla como alguien que sabe y no vende humo.
+- Con visión de futuro y referencias prácticas a 2025.
+- Humor breve e inteligente cuando encaje (nunca forzado).
+- Siempre útil para comunidades de propietarios y clientes que quieren rehabilitar o mejorar su edificio.
+
+Escribe un post en español (900–1200 palabras) en formato Markdown que incluya:
+- Un título atractivo y preciso.
+- Un resumen ejecutivo de 3–5 líneas.
+- 4–6 secciones con subtítulos y bullets accionables.
+- Rangos de precios orientativos 2025 (aclarar que son estimaciones).
+- Riesgos habituales y cómo evitarlos.
+- Un checklist final.
+- Una llamada a la acción (CTA) clara.
+
+Incluye al inicio un bloque de metadatos en YAML con:
+title, date, slug, tags, excerpt, seo_title, seo_description.
 
 Tema de esta semana: {topic}
 """
@@ -156,3 +163,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
