@@ -36,3 +36,4 @@ jobs:
           SMTP_FROM: ${{ vars.SMTP_FROM }}
           SMTP_TO: ${{ vars.SMTP_TO }}
         run: python blog_autogen/main.py
+
